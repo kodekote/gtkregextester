@@ -17,6 +17,11 @@ void grt_list_init(grt_ref *grt)
             "focus-out-event",
             (GCallback)handle_focus_out,
             grt);
+    g_signal_connect(
+            gtk_tree_view_get_selection( (GtkTreeView *)gtk_builder_get_object(grt->builder, "tree_view")),
+            "changed",
+            (GCallback)handle_changed,
+            grt);
 }
 
 gboolean handle_focus_out(GtkWidget *w, GdkEventFocus event, gpointer data)
@@ -25,4 +30,20 @@ gboolean handle_focus_out(GtkWidget *w, GdkEventFocus event, gpointer data)
     gtk_tree_selection_unselect_all( sel );
 
     return FALSE;
+}
+
+void handle_changed(GtkTreeSelection *sel, gpointer data)
+{
+    grt_ref *grt = (grt_ref *)data;
+    GtkListStore *model;
+    GtkTreeIter iter;
+
+    if ( gtk_tree_selection_get_selected( sel, (GtkTreeModel **)&model, &iter ) )
+    {
+        gtk_widget_set_sensitive( (GtkWidget *)gtk_builder_get_object(grt->builder, "button_pop"), TRUE );
+    }
+    else
+    {
+        gtk_widget_set_sensitive( (GtkWidget *)gtk_builder_get_object(grt->builder, "button_pop"), FALSE );
+    }
 }
