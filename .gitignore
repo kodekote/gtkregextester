@@ -1,0 +1,5 @@
+
+gtkregextester
+*.o
+.idea/
+
