@@ -3,6 +3,10 @@
 #include "grt_window.h"
 #include "grt_regex.h"
 #include "grt_target.h"
+#include "grt_list.h"
+#include "grt_button.h"
+
+//  [a-z]\s*\+\s*[a-z]\s*\=\s*[0-9]+
 
 int main(int argc, char *argv[]) {
     grt_ref grt = { NULL };
@@ -16,22 +20,8 @@ int main(int argc, char *argv[]) {
     grt_window_init( &grt );
     grt_regex_init( &grt );
     grt_target_init( &grt );
-
-//    GtkLabel *label = (GtkLabel *)gtk_label_new( "Regular expressions" );
-//    gtk_widget_set_margin_start( (GtkWidget *)label, 10 );
-//    gtk_widget_set_margin_top( (GtkWidget *)label, 10 );
-//    gtk_widget_set_margin_bottom( (GtkWidget *)label, 10 );
-//    gtk_tree_view_column_set_widget(
-//            (GtkTreeViewColumn *)gtk_builder_get_object(builder, "column1"),
-//            (GtkWidget *)label );
-//    gtk_widget_show( (GtkWidget *)label );
-
-//    GtkListStore *list_store = (GtkListStore *)gtk_builder_get_object( builder, "list_store" );
-//    GtkTreeIter iter;
-//    gtk_list_store_append( list_store, &iter );
-//    gtk_list_store_set( list_store, &iter, 0, "ab?", -1 );
-
-//    gtk_widget_show_all( (GtkWidget *)gtk_builder_get_object(builder, "window") );
+    grt_list_init( &grt );
+    grt_button_init( &grt );
 
     gtk_main();
     return 0;

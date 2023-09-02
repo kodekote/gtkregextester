@@ -23,7 +23,7 @@ void target_handle_changed(GtkTextBuffer *buffer, gpointer data)
 
     gtk_text_buffer_get_bounds( buffer, &start, &end );
     gtk_text_buffer_apply_tag_by_name( buffer, "spacing", &start, &end );
-    gtk_widget_queue_draw( (GtkWidget *)gtk_builder_get_object(grt->builder, "text_regex") );
+//    gtk_widget_queue_draw( (GtkWidget *)gtk_builder_get_object(grt->builder, "text_regex") );
 }
 
 gboolean target_handle_draw(GtkWidget *w, cairo_t *cr, gpointer data)
@@ -32,6 +32,8 @@ gboolean target_handle_draw(GtkWidget *w, cairo_t *cr, gpointer data)
     GtkTextBuffer *buf;
     GtkTextIter start;
     GtkTextIter end;
+
+//    printf( "target_handle_draw\n" );
 
     gchar *regex = NULL;
     gchar *target = NULL;

@@ -11,6 +11,8 @@ void grt_regex_init(grt_ref *grt)
     GtkTextBuffer *buf = gtk_text_view_get_buffer( text_regex );
     gtk_text_buffer_create_tag( buf, "spacing", "letter-spacing", 1400, NULL );
 
+    g_object_set_data( (GObject *)text_regex, "draw-queued", (gpointer)FALSE );
+
     g_signal_connect( gtk_text_view_get_buffer( text_regex ), "changed", (GCallback)regex_handle_changed, grt );
     g_signal_connect_after( text_regex, "draw", (GCallback)regex_handle_draw, grt );
 }
@@ -35,7 +37,8 @@ gboolean regex_handle_draw(GtkWidget *w, cairo_t *cr, gpointer data)
     regex_t r;
     gboolean is_valid;
     GdkRectangle rect;
-    gint y;
+
+//    printf( "regex_handle_draw\n" );
 
     buf = gtk_text_view_get_buffer( (GtkTextView *)w );
     gtk_text_buffer_get_start_iter( buf, &start );
@@ -62,7 +65,15 @@ gboolean regex_handle_draw(GtkWidget *w, cairo_t *cr, gpointer data)
 
     gtk_text_view_get_visible_rect( (GtkTextView *)w, &rect );
 
-    gtk_widget_queue_draw_area( w, rect.width - STATUS_RECT_W - 5, 5, STATUS_RECT_W, STATUS_RECT_H );
+    if ( g_object_get_data((GObject *)w, "draw-queued") == FALSE )
+    {
+        g_object_set_data( (GObject *)w, "draw-queued", (gpointer)TRUE );
+        gtk_widget_queue_draw_area( w, rect.width - STATUS_RECT_W - 5, 5, STATUS_RECT_W, STATUS_RECT_H );
+    }
+    else
+    {
+        g_object_set_data( (GObject *)w, "draw-queued", (gpointer)FALSE );
+    }
     cairo_rectangle( cr, rect.width - STATUS_RECT_W - 5, 5, STATUS_RECT_W, STATUS_RECT_H );
     cairo_fill( cr );
 

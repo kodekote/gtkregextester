@@ -9,7 +9,9 @@ $(PROGRAM_NAME): 											\
 		main.o												\
 		grt_window.o										\
 		grt_regex.o											\
-		grt_target.o
+		grt_target.o										\
+		grt_list.o											\
+		grt_button.o
 	$(CC) $^ -o $@ $(CFLAGS)								\
 		-l gtk-3											\
 		-l gdk-3											\
@@ -54,6 +56,28 @@ grt_regex.o: grt_regex.c grt_regex.h
 
 grt_target.o: grt_target.c grt_target.h
 	$(CC) grt_target.c -c -o $@ $(CFLAGS)					\
+		-I /usr/include/gtk-3.0/ 							\
+		-I /usr/include/glib-2.0/							\
+		-I /usr/lib/x86_64-linux-gnu/glib-2.0/include/ 		\
+		-I /usr/include/pango-1.0/							\
+		-I /usr/include/harfbuzz/						 	\
+		-I /usr/include/cairo/ 								\
+		-I /usr/include/gdk-pixbuf-2.0/ 					\
+		-I /usr/include/atk-1.0/
+
+grt_list.o: grt_list.c grt_list.h
+	$(CC) grt_list.c -c -o $@ $(CFLAGS)					\
+		-I /usr/include/gtk-3.0/ 							\
+		-I /usr/include/glib-2.0/							\
+		-I /usr/lib/x86_64-linux-gnu/glib-2.0/include/ 		\
+		-I /usr/include/pango-1.0/							\
+		-I /usr/include/harfbuzz/						 	\
+		-I /usr/include/cairo/ 								\
+		-I /usr/include/gdk-pixbuf-2.0/ 					\
+		-I /usr/include/atk-1.0/
+
+grt_button.o: grt_button.c grt_button.h
+	$(CC) grt_button.c -c -o $@ $(CFLAGS)					\
 		-I /usr/include/gtk-3.0/ 							\
 		-I /usr/include/glib-2.0/							\
 		-I /usr/lib/x86_64-linux-gnu/glib-2.0/include/ 		\
