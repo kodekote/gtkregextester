@@ -1,5 +1,5 @@
 # gtkregextester
-A tool to test regular expressions against target strings for Linux operating systems (or any system that support GTK 3).
+A tool to test regular expressions against target strings for Linux operating systems (or any system that supports GTK 3).
 
 Aside from being useful, this code showcases several poorly-documented features of GTK 3
 that may be of interest to some. Namely:
