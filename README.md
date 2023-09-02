@@ -28,3 +28,4 @@ Add a list view that allows saving regular expressions of interest. Allow output
 Add a Java mode which runs a Java program in daemon mode that tests regular expressions as defined in java.util.regex.
 Write a custom regcomp--one that does not allow nonsense regular expressions like "ab+*".
 
+![Screenshot](/gtkregextester)
